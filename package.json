@@ -1,0 +1,45 @@
+{
+    "name": "grunt-express-middleware",
+    "description": "The best Grunt plugin ever.",
+    "version": "1.0.0",
+    "homepage": "https://github.com/henrytao-me/grunt-express-middleware",
+    "author": {
+        "name": "Henry Tao",
+        "email": "hi@henrytao.me",
+        "url": "http://henrytao.me"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git://github.com/henrytao-me/grunt-express-middleware.git"
+    },
+    "bugs": {
+        "url": "https://github.com/henrytao-me/grunt-express-middleware/issues"
+    },
+    "licenses": [{
+        "type": "MIT",
+        "url": "https://github.com/henrytao-me/grunt-express-middleware/blob/master/LICENSE-MIT"
+    }],
+    "engines": {
+        "node": ">= 0.8.0"
+    },
+    "scripts": {
+        "test": "grunt test"
+    },
+    "dependencies": {
+        "express": "~3.4.8",
+        "connect-livereload": "^0.3.2",
+        "ejs": "^0.8.5"
+    },
+    "devDependencies": {
+        "grunt-contrib-jshint": "~0.6.0",
+        "grunt-contrib-clean": "~0.4.0",
+        "grunt-contrib-nodeunit": "~0.2.0",
+        "grunt": "~0.4.4"
+    },
+    "peerDependencies": {
+        "grunt": "~0.4.4"
+    },
+    "keywords": [
+        "gruntplugin"
+    ]
+}
