@@ -37,9 +37,13 @@ module.exports = function(grunt) {
 
     grunt.registerMultiTask('express', function() {
         var thisTarget = this.target;
+
+        // change default server to express, instead of connect
+        grunt.config.set('express.options.server', path.resolve(__dirname, '..', 'lib', 'express.js'));
+
         var options = this.options({
             serverreload: false,
-            livereload: false,
+            livereload: null,
             open: false
         });
 
@@ -50,28 +54,32 @@ module.exports = function(grunt) {
             if (!Array.isArray(options.bases)) {
                 grunt.config.set('express.' + thisTarget + '.options.bases', [options.bases]);
                 options.bases = [options.bases];
-            }
+            };
 
             // wrap each path in connect.static middleware
             options.bases = _.map(options.bases, function(b) {
                 return path.resolve(b);
             });
-        }
+        };
 
-        if (options.livereload === true) {
-            options.livereload = DefaultLiveReloadPort;
-        }
+        if (options.livereload) {
+        	options.livereload = _.extend(options.livereload, {
+        		port: DefaultLiveReloadPort,
+        		watch: options.bases || []
+        	});
+        	grunt.config.set('express.' + thisTarget + '.options.livereload', options.livereload.port);
+        };
         if (options.livereload) {
             // dynamically add `grunt-contrib-watch` task to manage livereload of static `bases`
             grunt.config.set('watch.' + util.makeServerTaskName(thisTarget, 'livereload'), {
-                files: _.map(options.bases, function(base) {
+                files: _.map(options.livereload.watch, function(base) {
                     return base + '/**/*.*';
                 }),
                 options: {
-                    livereload: options.livereload
+                    livereload: options.livereload.port
                 }
             });
-        }
+        };
 
         if (options.serverreload) {
             var watcherOptions = {
@@ -160,7 +168,6 @@ module.exports = function(grunt) {
         grunt.task.run(taskName.replace('.', ':'));
     });
 
-
     grunt.registerTask('express-start', 'Start the server (or restart if already started)', function(target) {
         util.touchFile(serverMap[target]);
     });
@@ -170,9 +177,13 @@ module.exports = function(grunt) {
     grunt.registerTask('express-server', function(target) {
         var self = this;
         var options = _.extend({}, grunt.config.get('express.options'), grunt.config.get('express.' + target + '.options'));
-        if (options.livereload === true) {
-            options.livereload = DefaultLiveReloadPort;
-        }
+
+        if (options.livereload) {
+        	options.livereload = _.extend(options.livereload, {
+        		port: DefaultLiveReloadPort,
+        		watch: options.bases || []
+        	});
+        };
 
         if (options.serverreload) {
             util.watchModule(function(oldStat, newStat) {
