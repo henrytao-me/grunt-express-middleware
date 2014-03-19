@@ -1,7 +1,7 @@
 {
     "name": "grunt-express-middleware",
     "description": "The best Grunt plugin ever.",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "homepage": "https://github.com/henrytao-me/grunt-express-middleware",
     "author": {
         "name": "Henry Tao",
@@ -27,6 +27,7 @@
     },
     "dependencies": {
         "ejs": "^0.8.5",
+        "body-parser": "~1.0.0",
         "connect": "~2.7.8",
         "temp": "~0.5.0",
         "touch": "~0.0.2",
