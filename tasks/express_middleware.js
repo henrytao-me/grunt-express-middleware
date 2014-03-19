@@ -63,7 +63,7 @@ module.exports = function(grunt) {
         };
 
         if (options.livereload) {
-        	options.livereload = _.extend(options.livereload, {
+        	options.livereload = _.defaults(options.livereload, {
         		port: DefaultLiveReloadPort,
         		watch: options.bases || []
         	});
@@ -176,13 +176,14 @@ module.exports = function(grunt) {
 
     grunt.registerTask('express-server', function(target) {
         var self = this;
-        var options = _.extend({}, grunt.config.get('express.options'), grunt.config.get('express.' + target + '.options'), {
+        var options = _.extend({}, grunt.config.get('express.options'), grunt.config.get('express.' + target + '.options'));
+        options = _.defaults(options, {
         	hostname: 'localhost',
             port: 8080
-        });
+        })
 
         if (options.livereload) {
-        	options.livereload = _.extend(options.livereload, {
+        	options.livereload = _.defaults(options.livereload, {
         		port: DefaultLiveReloadPort,
         		watch: options.bases || []
         	});
