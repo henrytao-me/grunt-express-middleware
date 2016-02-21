@@ -15,10 +15,12 @@
     "bugs": {
         "url": "https://github.com/henrytao-me/grunt-express-middleware/issues"
     },
-    "licenses": [{
-        "type": "MIT",
-        "url": "https://github.com/henrytao-me/grunt-express-middleware/blob/master/LICENSE-MIT"
-    }],
+    "licenses": [
+        {
+            "type": "MIT",
+            "url": "https://github.com/henrytao-me/grunt-express-middleware/blob/master/LICENSE-MIT"
+        }
+    ],
     "engines": {
         "node": ">= 0.8.0"
     },
@@ -43,12 +45,11 @@
         "grunt-contrib-nodeunit": "~0.2.0",
         "grunt": "~0.4.4",
         "express": "~3.2.2",
-        "grunt-contrib-nodeunit": "~0.2.0",
         "matchdep": "~0.1.2",
         "request": "~2.22.0"
     },
     "peerDependencies": {
-        "grunt": "~0.4.4"
+        "grunt": ">=0.4.0"
     },
     "keywords": [
         "gruntplugin"
